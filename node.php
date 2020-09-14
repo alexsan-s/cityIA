@@ -77,7 +77,9 @@ class Search
             if(is_null($this->atual))
                 break;
             $ind = array_values($nodes)[$this->atual->value1];
-            foreach (range(count($graphs[$ind])) as $i)
+            foreach (range(count($graphs[$ind]), sizeof($graphs)) as $i){
+                
+            }
         }
     }
 }
