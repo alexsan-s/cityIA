@@ -19,6 +19,6 @@ $way = [];
 $source = "aa";
 $detiny = "aas";
 
-$sol->amplitude($origem, $destino);
+$sol->amplitude($origem, $destino, $nodes, $graphs);
 
 ?>
