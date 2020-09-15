@@ -16,9 +16,10 @@ $graphs = [
 ];
 $sol = new Search();
 $way = [];
-$source = "aa";
-$detiny = "aas";
+$source = "PMJN";
+$detiny = "CR";
 
-$sol->amplitude($origem, $destino, $nodes, $graphs);
+$way = $sol->amplitude($source, $detiny, $nodes, $graphs);
+echo $way;
 
 ?>
