@@ -1,8 +1,13 @@
 <?php
 class Node
 {
-    // var $father;
-    function __constructor($father = null, $value1 = null, $value2 = null, $previous = null, $next = null)
+    var $father;
+    var $value1;
+    var $value2;
+    var $previous;
+    var $next;
+
+    function __construct($father, $value1, $value2, $previous, $next)
     {
         $this->father   = $father;
         $this->value1   = $value1;
@@ -20,10 +25,9 @@ class Lista
     function insertLast($v1, $v2, $f)
     {
         $new_node = new Node($f, $v1, $v2, null, null);
-
-        if (is_null($this->head))
+        if (is_null($this->head)) {
             $this->head = $new_node;
-        else {
+        } else {
             $this->tail->next = $new_node;
             $new_node->previous = $this->tail;
         }
@@ -39,7 +43,7 @@ class Lista
             $this->head = $this->head->next;
             if (!is_null($this->head))
                 $this->head->previus = null;
-            else{
+            else {
                 $this->tail = null;
             }
             return $no;
@@ -56,11 +60,11 @@ class Lista
     {
         $atual = $this->tail;
         $way = [];
-        while (!is_null($this->atual->father)) {
-            array_push($way, $this->atual->value1);
-            $this->atual = $this->atual->father;
+        while (!is_null($atual->father)) {
+            array_push($way, $atual->value1);
+            $atual = $atual->father;
         }
-        array_push($way, $this->atual->value1);
+        array_push($way, $atual->value1);
         return $way;
     }
 
@@ -83,28 +87,27 @@ class Search
         $l1 = new lista();
         $l2 = new lista();
         $visited = [];
+
         $l1->insertLast($start, 0, null);
         $l2->insertLast($start, 0, null);
         $row = [];
         array_push($row, $start, 0);
         array_push($visited, $row);
-        $flag1 = False;
-        while (!is_null($l1->empty()) && $flag1 == False) {
-            $atual = $l1->deleteFirst();
-            print_r($atual);
-            if (is_null($this->atual)) {
-                echo "Vazio<p>";
-                break;
-            }
-            $ind = array_values($nodes)[$atual->value1];
-            print_r($ind);
-            for ($i = 0; $i < sizeof($graphs); $i++) {
-                $new = $graphs[$ind][$i];
-                $flag = True;
 
-                for ($j = 0; $j < sizeof($graphs); $j++) {
+        while (!is_null($l1->empty())) {
+            $atual = $l1->deleteFirst();
+            if (is_object($atual) == 0) break;
+            $ind = array_search($atual->value1, $nodes);
+            echo "<p>";
+            for ($i = 0; $i < sizeof($graphs[$ind]); $i++) {
+                $new = $graphs[$ind][$i];
+                // echo $new;
+                // echo '<p>';
+                $flag = True;
+                for ($j = 0; $j < sizeof($visited); $j++) {
+                    // echo $visited[$j][0];
                     if ($visited[$j][0] == $new) {
-                        if ($visited[$j][1] <= ($this->atual->value2 + 1)) {
+                        if ($visited[$j][1] <= ($atual->value2 + 1)) {
                             $flag = False;
                         } else {
                             $visited[$j][1] = $this->atual->value2 + 1;
@@ -113,24 +116,19 @@ class Search
                     }
                 }
                 if ($flag) {
-                    echo "ei<p>";
-                    $l1->insertLast($this->new, $this->atual->value2 + 1, $this->atual);
-                    $l2->insertLast($this->new, $this->atual->value2 + 1, $this->atual);
+                    $l1->insertLast($new, $atual->value2 + 1, $atual);
+                    $l2->insertLast($new, $atual->value2 + 1, $atual);
                     $row = [];
-                    array_push($row, $new, $this->atual->value2 + 1);
+                    array_push($row, $new, $atual->value2 + 1);
                     array_push($visited, $row);
                     if ($new == $end) {
-                        $flag1 = True;
+                        $way = [];
+                        $way = $l2->showWay();
+                        return $way;
                     }
                 }
             }
         }
-        $way = [];
-        if ($flag1) {
-            $way = $l2->showWay();
-        } else {
-            $way = "Caminho não encontrado";
-        }
-        return $way;
+        return "Caminho não encontrado";
     }
 }
