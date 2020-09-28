@@ -50,15 +50,16 @@ class Lista
         }
     }
 
-    function deleteLast(){
-        if(is_null($this->tail)){
+    function deleteLast()
+    {
+        if (is_null($this->tail)) {
             return null;
-        }else{
+        } else {
             $node = $this->head;
             $this->tail = $this->tail->previus;
-            if(!is_null($this->tail)){
+            if (!is_null($this->tail)) {
                 $this->tail->next = null;
-            }else{
+            } else {
                 $this->head = null;
             }
             return $node;
@@ -147,7 +148,8 @@ class Search
         return "Caminho não encontrado";
     }
 
-    function depth($start, $end, $nodes, $graphs){
+    function depth($start, $end, $nodes, $graphs)
+    {
         $l1 = new lista();
         $l2 = new lista();
         $visited = [];
@@ -157,12 +159,12 @@ class Search
         $row = [];
         array_push($row, $start, 0);
         array_push($visited, $row);
-
-        while (!is_null($l1->empty())) {
+        $flag1 = False;
+        while (!is_null($l1->empty()) and $flag1 == False) {
             $atual = $l1->deleteLast();
             if (is_object($atual) == 0) break;
             $ind = array_search($atual->value1, $nodes);
-            for ($i = 0; $i < sizeof($graphs[$ind])-1; $i++) {
+            for ($i = sizeof($graphs[$ind]) - 1; $i >= -1; $i--) {
                 $new = $graphs[$ind][$i];
                 $flag = True;
                 for ($j = 0; $j < sizeof($visited); $j++) {
@@ -182,13 +184,15 @@ class Search
                     array_push($row, $new, $atual->value2 + 1);
                     array_push($visited, $row);
                     if ($new == $end) {
-                        $way = [];
-                        $way = $l2->showWay();
-                        return $way;
+                        $flag1 = True;
                     }
                 }
             }
         }
-        return "Caminho não encontrado";
+        $way = [];
+        if ($flag) $way = $l2->showWay();
+        else
+            $way = "Caminho não encontrado";
+        return $way;
     }
 }

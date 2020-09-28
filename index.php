@@ -35,9 +35,10 @@ foreach (array_reverse($way) as $key) {
 echo "<p>";
 
 $way = $sol->depth($source, $destiny, $nodes, $graphs);
-echo gettype($way);
-if(gettype($way)){
+if (is_array($way)) {
     foreach (array_reverse($way) as $key) {
         echo "$key  ";
     }
+} else {
+    echo $way;
 }
