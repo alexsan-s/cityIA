@@ -159,16 +159,18 @@ class Search
         $row = [];
         array_push($row, $start, 0);
         array_push($visited, $row);
-        $flag1 = False;
-        while (!is_null($l1->empty()) and $flag1 == False) {
+
+        while (!is_null($l1->empty())) {
             $atual = $l1->deleteLast();
             if (is_object($atual) == 0) break;
             $ind = array_search($atual->value1, $node);
             for ($i = sizeof($graph[$ind]) - 1; $i >= 0; $i--) {
                 $new = $graph[$ind][$i];
+                // echo $new;
+                // echo '<p>';
                 $flag = True;
-
                 for ($j = 0; $j < sizeof($visited); $j++) {
+                    // echo $visited[$j][0];
                     if ($visited[$j][0] == $new) {
                         if ($visited[$j][1] <= ($atual->value2 + 1)) {
                             $flag = False;
@@ -188,15 +190,13 @@ class Search
                     echo $end;
                     echo "<p>";
                     if ($new == $end) {
-                        $flag1 = True;
+                        $way = [];
+                        $way = $l2->showWay();
+                        return $way;
                     }
                 }
             }
         }
-        $way = [];
-        if ($flag1) $way = $l2->showWay();
-        else
-            $way = "Caminho não encontrado";
-        return $way;
+        return "Caminho não encontrado";
     }
 }
