@@ -56,7 +56,7 @@ class Lista
             return null;
         } else {
             $node = $this->tail;
-            $this->tail = $this->tail->previus;
+            $this->tail = $this->tail->previous;
             if (!is_null($this->tail)) {
                 $this->tail->next = null;
             } else {
@@ -114,14 +114,10 @@ class Search
             $atual = $l1->deleteFirst();
             if (is_object($atual) == 0) break;
             $ind = array_search($atual->value1, $node);
-            echo "<p>";
             for ($i = 0; $i < sizeof($graph[$ind]); $i++) {
                 $new = $graph[$ind][$i];
-                // echo $new;
-                // echo '<p>';
                 $flag = True;
                 for ($j = 0; $j < sizeof($visited); $j++) {
-                    // echo $visited[$j][0];
                     if ($visited[$j][0] == $new) {
                         if ($visited[$j][1] <= ($atual->value2 + 1)) {
                             $flag = False;
@@ -166,11 +162,8 @@ class Search
             $ind = array_search($atual->value1, $node);
             for ($i = sizeof($graph[$ind]) - 1; $i >= 0; $i--) {
                 $new = $graph[$ind][$i];
-                // echo $new;
-                // echo '<p>';
                 $flag = True;
-                for ($j = 0; $j < sizeof($visited); $j++) {
-                    // echo $visited[$j][0];
+                for ($j = sizeof($visited); $j >= 0; $j--) {
                     if ($visited[$j][0] == $new) {
                         if ($visited[$j][1] <= ($atual->value2 + 1)) {
                             $flag = False;
@@ -186,9 +179,6 @@ class Search
                     $row = [];
                     array_push($row, $new, $atual->value2 + 1);
                     array_push($visited, $row);
-                    echo $new;
-                    echo $end;
-                    echo "<p>";
                     if ($new == $end) {
                         $way = [];
                         $way = $l2->showWay();
