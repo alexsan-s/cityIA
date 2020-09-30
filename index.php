@@ -1,8 +1,7 @@
 <?php
 include 'node.php';
-// $nodes = ["PMJN", "MML", "DT", "SDST", "CSFC", "MIST", "MHNT", "CR", "PM", "PVI", "MM"];
-$nodes = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "L", "M", "N", "O", "P", "R", "S", "T", "U", "V", "Z"];
-// $graphs = [
+// $node = ["PMJN", "MML", "DT", "SDST", "CSFC", "MIST", "MHNT", "CR", "PM", "PVI", "MM"];
+// $graph = [
 //     ["DT", "MML"],
 //     ["CSFC", "DT", "PMJN"],
 //     ["CSFC", "MML", "PMJN", "SDST"],
@@ -15,26 +14,42 @@ $nodes = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "L", "M", "N", "O", "P", 
 //     ["CR", "MM", "PM"],
 //     ["PVI"],
 // ];
-$graphs = [
-    ["Z", "T", "S"], ["U", "P", "G", "F"], ["R", "P", "D"],
-    ["M", "C"], ["H"], ["S", "B"], ["B"], ["U", "E"], ["V", "N"],
-    ["T", "M"], ["L", "D"], ["I"], ["Z", "S"], ["R", "C", "B"],
-    ["S", "P", "C"], ["R", "O", "F", "A"], ["L", "A"],
-    ["V", "H", "B"], ["U", "I"], ["O", "A"]
+$node = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "L", "M", "N", "O", "P", "R", "S", "T", "U", "V", "Z"];
+$graph = [
+    ["Z", "T", "S"], //A
+    ["U", "P", "G", "F"], //B
+    ["R", "P", "D"], //C
+    ["M", "C"], //D
+    ["H"], //E
+    ["S", "B"], //F
+    ["B"], //G
+    ["U", "E"], //H
+    ["V", "N"], //L
+    ["T", "M"], //I
+    ["L", "D"], //M
+    ["I"], //N
+    ["Z", "S"], //O
+    ["R", "C", "B"], //P
+    ["S", "P", "C"], //R
+    ["R", "O", "F", "A"], //S
+    ["L", "A"], //T
+    ["V", "H", "B"], //U
+    ["U", "I"], //V
+    ["O", "A"] //Z
 ];
 
 $sol = new Search();
 $way = [];
 $source = "A";
-$detiny = "D";
+$destiny = "D";
 
-$way = $sol->amplitude($source, $detiny, $nodes, $graphs);
+$way = $sol->amplitude($source, $destiny, $node, $graph);
 foreach (array_reverse($way) as $key) {
     echo "$key  ";
 }
 echo "<p>";
 
-$way = $sol->depth($source, $destiny, $nodes, $graphs);
+$way = $sol->depth($source, $destiny, $node, $graph);
 if (is_array($way)) {
     foreach (array_reverse($way) as $key) {
         echo "$key  ";

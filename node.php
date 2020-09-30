@@ -55,7 +55,7 @@ class Lista
         if (is_null($this->tail)) {
             return null;
         } else {
-            $node = $this->head;
+            $node = $this->tail;
             $this->tail = $this->tail->previus;
             if (!is_null($this->tail)) {
                 $this->tail->next = null;
@@ -97,7 +97,7 @@ class Lista
 
 class Search
 {
-    function amplitude($start, $end, $nodes, $graphs)
+    function amplitude($start, $end, $node, $graph)
     {
 
         $l1 = new lista();
@@ -113,10 +113,10 @@ class Search
         while (!is_null($l1->empty())) {
             $atual = $l1->deleteFirst();
             if (is_object($atual) == 0) break;
-            $ind = array_search($atual->value1, $nodes);
+            $ind = array_search($atual->value1, $node);
             echo "<p>";
-            for ($i = 0; $i < sizeof($graphs[$ind]); $i++) {
-                $new = $graphs[$ind][$i];
+            for ($i = 0; $i < sizeof($graph[$ind]); $i++) {
+                $new = $graph[$ind][$i];
                 // echo $new;
                 // echo '<p>';
                 $flag = True;
@@ -148,7 +148,7 @@ class Search
         return "Caminho não encontrado";
     }
 
-    function depth($start, $end, $nodes, $graphs)
+    function depth($start, $end, $node, $graph)
     {
         $l1 = new lista();
         $l2 = new lista();
@@ -163,10 +163,11 @@ class Search
         while (!is_null($l1->empty()) and $flag1 == False) {
             $atual = $l1->deleteLast();
             if (is_object($atual) == 0) break;
-            $ind = array_search($atual->value1, $nodes);
-            for ($i = sizeof($graphs[$ind]) - 1; $i >= -1; $i--) {
-                $new = $graphs[$ind][$i];
+            $ind = array_search($atual->value1, $node);
+            for ($i = sizeof($graph[$ind]) - 1; $i >= 0; $i--) {
+                $new = $graph[$ind][$i];
                 $flag = True;
+
                 for ($j = 0; $j < sizeof($visited); $j++) {
                     if ($visited[$j][0] == $new) {
                         if ($visited[$j][1] <= ($atual->value2 + 1)) {
@@ -183,6 +184,9 @@ class Search
                     $row = [];
                     array_push($row, $new, $atual->value2 + 1);
                     array_push($visited, $row);
+                    echo $new;
+                    echo $end;
+                    echo "<p>";
                     if ($new == $end) {
                         $flag1 = True;
                     }
@@ -190,7 +194,7 @@ class Search
             }
         }
         $way = [];
-        if ($flag) $way = $l2->showWay();
+        if ($flag1) $way = $l2->showWay();
         else
             $way = "Caminho não encontrado";
         return $way;
