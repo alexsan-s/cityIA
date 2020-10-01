@@ -57,3 +57,53 @@ if (is_array($way)) {
 } else {
     echo $way;
 }
+echo "<p>";
+
+$way = $sol->depth_limit($source, $destiny, 2, $node, $graph);
+if (is_array($way)) {
+    foreach (array_reverse($way) as $key) {
+        echo "$key  ";
+    }
+} else {
+    echo $way;
+}
+echo "<p>";
+
+$way = $sol->depth_limit($source, $destiny, 3, $node, $graph);
+if (is_array($way)) {
+    foreach (array_reverse($way) as $key) {
+        echo "$key  ";
+    }
+} else {
+    echo $way;
+}
+echo "<p>";
+
+$way = $sol->depth_limit($source, $destiny, 4, $node, $graph);
+if (is_array($way)) {
+    foreach (array_reverse($way) as $key) {
+        echo "$key  ";
+    }
+} else {
+    echo $way;
+}
+echo "<p>";
+
+$way = $sol->iterative_deepening($source, $destiny, 4, $node, $graph);
+if (is_array($way)) {
+    foreach (array_reverse($way) as $key) {
+        echo "$key  ";
+    }
+} else {
+    echo $way;
+}
+echo "<p>";
+
+$way = $sol->bidirectional($source, $destiny, $node, $graph);
+if (is_array($way)) {
+    foreach (array_reverse($way) as $key) {
+        echo "$key  ";
+    }
+} else {
+    echo $way;
+}
