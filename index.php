@@ -49,6 +49,18 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Sobre</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="col-sm-8">
         <form action="/action.php" method="post">
             <div class="form-group">
@@ -78,7 +90,7 @@
             </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Destino</label>
-                <select class="form-control" id="exampleFormControlSelect1" name ="destiny">
+                <select class="form-control" id="exampleFormControlSelect1" name="destiny">
                     <option value="A">A</option>
                     <option value="B">B</option>
                     <option value="C">C</option>

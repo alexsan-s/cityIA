@@ -45,8 +45,12 @@ $destiny = $_POST['destiny'];
 
 if (isset($_POST["amplitude"])) {
     $way = $sol->amplitude($source, $destiny, $node, $graph);
-    foreach (array_reverse($way) as $key) {
-        echo "$key  ";
+    if (is_array($way)) {
+        foreach (array_reverse($way) as $key) {
+            echo "$key  ";
+        }
+    } else {
+        echo $way;
     }
 } else if (isset($_POST["depth"])) {
     $way = $sol->depth($source, $destiny, $node, $graph);
