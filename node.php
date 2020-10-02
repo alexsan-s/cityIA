@@ -351,8 +351,10 @@ class Search
                         if ($flag3) {
                             $way = [];
                             $way = $l2->showWay();
-                            $way = array_reverse($way);
-                            array_push($way, $l4->showWay1($new));
+                            $way = array_reverse($way); 
+                            foreach ($l2->showWay1($new) as $key) {
+                                array_push($way, $key);
+                            }
                             return $way;
                         } else {
                             $row = [];
@@ -395,8 +397,10 @@ class Search
                         if ($flag3) {
                             $way = [];
                             $way = $l4->showWay();
-                            $way = array_reverse($way);                            
-                            array_push($way, $l2->showWay1($new));
+                            $way = array_reverse($way); 
+                            foreach ($l2->showWay1($new) as $key) {
+                                array_push($way, $key);
+                            }
                             return $way;
                         } else {
                             $row = [];
