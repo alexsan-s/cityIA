@@ -40,8 +40,8 @@ $graph = [
 
 $sol = new Search();
 $way = [];
-$source = "A";
-$destiny = "D";
+$source = $_POST['source'];
+$destiny = $_POST['destiny'];
 
 if (isset($_POST["amplitude"])) {
     $way = $sol->amplitude($source, $destiny, $node, $graph);
