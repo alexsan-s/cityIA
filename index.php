@@ -2,49 +2,20 @@
 
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load("current", {
-            packages: ["corechart"]
+
+    <script src="./build/sigma.min.js"></script>
+    <script src="./build/plugins/sigma.parsers.json.min.js"></script>
+
+    <script>
+        sigma.parsers.json('data.json', {
+            container: 'sigma_div',
+            settings: {
+                // mouseEnabled: false,
+                defaultEdgeColor: '#333',
+                defaultNodeColor: '#333',
+                edgeColor: 'default'
+            }
         });
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-                ['', 'PMJN'],
-                [3, 4],
-                [2, 6],
-                [3, 10],
-            ]);
-
-            var options = {
-                legend: '',
-                pointSize: 20,
-                series: {
-                    0: {
-                        pointShape: 'circle'
-                    },
-                    1: {
-                        pointShape: 'circle'
-                    },
-                    2: {
-                        pointShape: 'circle'
-                    },
-                    3: {
-                        pointShape: 'circle'
-                    },
-                    4: {
-                        pointShape: 'circle'
-                    },
-                    5: {
-                        pointShape: 'circle'
-                    },
-                }
-            };
-
-            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-            chart.draw(data, options);
-        }
     </script>
 </head>
 
@@ -119,7 +90,7 @@
             <input class="btn btn-primary" type="submit" value="Aprofundamento Interativo" name="iterative_deepening">
             <input class="btn btn-primary" type="submit" value="Bidirecional" name="bidirectional">
         </form>
-        <div id="chart_div" style="width: 900px; height: 500px;"></div>
+        <div id="sigma_div" style="width: 700px; height: 300px;"></div>
     </div>
 
 </body>
