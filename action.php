@@ -39,13 +39,13 @@ if (isset($_POST["amplitude"])) {
 } else if (isset($_POST["bidirectional"])) {
     $way = $sol->bidirectional($source, $destiny, $node, $graph);
 }
-if (is_array($way)) {
-    foreach (array_reverse($way) as $key) {
-         echo "$key  ";
-    }
-} else {
-     echo $way;
-}
+// if (is_array($way)) {
+//     foreach (array_reverse($way) as $key) {
+//          echo "$key  ";
+//     }
+// } else {
+//      echo $way;
+// }
 $ids = array();
 if (is_array($way)) {
     foreach ($data as $key => $entry) {
@@ -62,7 +62,7 @@ if (is_array($way)) {
                 }
             }
         }
-        print_r($ids);
+        // print_r($ids);
         // echo "<p>";
         if ($key == "edges") {
             for ($i = 0; $i < sizeof($entry); $i++) {
@@ -84,7 +84,7 @@ if (is_array($way)) {
 
 // echo "Corrigido<p>";
 
-// $newJsonString = json_encode($data);
-// file_put_contents('data.json', $newJsonString);
-// header("Location: index.php");
-// die();
+$newJsonString = json_encode($data);
+file_put_contents('data.json', $newJsonString);
+header("Location: index.php");
+die();
