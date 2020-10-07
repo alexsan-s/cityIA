@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html>
 
 <head>
@@ -37,35 +38,35 @@
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Origem</label>
                 <select class="form-control" id="exampleFormControlSelect1" name="source">
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="E">E</option>
-                    <option value="F">F</option>
-                    <option value="G">G</option>
-                    <option value="H">H</option>
-                    <option value="P">P</option>
-                    <option value="Q">Q</option>
-                    <option value="R">R</option>
-                    <option value="S">S</option>
+                    <option value="A" <? if(isset($_SESSION['source'])){if($_SESSION['source']=="A" ){ echo 'selected' ;}else{ echo '' ;}} ?>>A</option>
+                    <option value="B" <? if(isset($_SESSION['source'])){if($_SESSION['source']=="B" ){ echo 'selected' ;}else{ echo '' ;}} ?>>B</option>
+                    <option value="C" <? if(isset($_SESSION['source'])){if($_SESSION['source']=="C" ){ echo 'selected' ;}else{ echo '' ;}} ?>>C</option>
+                    <option value="D" <? if(isset($_SESSION['source'])){if($_SESSION['source']=="D" ){ echo 'selected' ;}else{ echo '' ;}} ?>>D</option>
+                    <option value="E" <? if(isset($_SESSION['source'])){if($_SESSION['source']=="E" ){ echo 'selected' ;}else{ echo '' ;}} ?>>E</option>
+                    <option value="F" <? if(isset($_SESSION['source'])){if($_SESSION['source']=="F" ){ echo 'selected' ;}else{ echo '' ;}} ?>>F</option>
+                    <option value="G" <? if(isset($_SESSION['source'])){if($_SESSION['source']=="G" ){ echo 'selected' ;}else{ echo '' ;}} ?>>G</option>
+                    <option value="H" <? if(isset($_SESSION['source'])){if($_SESSION['source']=="H" ){ echo 'selected' ;}else{ echo '' ;}} ?>>H</option>
+                    <option value="P" <? if(isset($_SESSION['source'])){if($_SESSION['source']=="P" ){ echo 'selected' ;}else{ echo '' ;}} ?>>P</option>
+                    <option value="Q" <? if(isset($_SESSION['source'])){if($_SESSION['source']=="Q" ){ echo 'selected' ;}else{ echo '' ;}} ?>>Q</option>
+                    <option value="R" <? if(isset($_SESSION['source'])){if($_SESSION['source']=="R" ){ echo 'selected' ;}else{ echo '' ;}} ?>>R</option>
+                    <option value="S" <? if(isset($_SESSION['source'])){if($_SESSION['source']=="S" ){ echo 'selected' ;}else{ echo '' ;}} ?>>S</option>
                 </select>
             </div>
             <div class="form-group">
                 <label for="exampleFormControlSelect1">Destino</label>
                 <select class="form-control" id="exampleFormControlSelect1" name="destiny">
-                <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="E">E</option>
-                    <option value="F">F</option>
-                    <option value="G">G</option>
-                    <option value="H">H</option>
-                    <option value="P">P</option>
-                    <option value="Q">Q</option>
-                    <option value="R">R</option>
-                    <option value="S">S</option>
+                    <option value="A" <? if(isset($_SESSION['destiny'])){if($_SESSION['destiny']=="A" ){ echo 'selected' ;}else{ echo '' ;}} ?>>A</option>
+                    <option value="B" <? if(isset($_SESSION['destiny'])){if($_SESSION['destiny']=="B" ){ echo 'selected' ;}else{ echo '' ;}} ?>>B</option>
+                    <option value="C" <? if(isset($_SESSION['destiny'])){if($_SESSION['destiny']=="C" ){ echo 'selected' ;}else{ echo '' ;}} ?>>C</option>
+                    <option value="D" <? if(isset($_SESSION['destiny'])){if($_SESSION['destiny']=="D" ){ echo 'selected' ;}else{ echo '' ;}} ?>>D</option>
+                    <option value="E" <? if(isset($_SESSION['destiny'])){if($_SESSION['destiny']=="E" ){ echo 'selected' ;}else{ echo '' ;}} ?>>E</option>
+                    <option value="F" <? if(isset($_SESSION['destiny'])){if($_SESSION['destiny']=="F" ){ echo 'selected' ;}else{ echo '' ;}} ?>>F</option>
+                    <option value="G" <? if(isset($_SESSION['destiny'])){if($_SESSION['destiny']=="G" ){ echo 'selected' ;}else{ echo '' ;}} ?>>G</option>
+                    <option value="H" <? if(isset($_SESSION['destiny'])){if($_SESSION['destiny']=="H" ){ echo 'selected' ;}else{ echo '' ;}} ?>>H</option>
+                    <option value="P" <? if(isset($_SESSION['destiny'])){if($_SESSION['destiny']=="P" ){ echo 'selected' ;}else{ echo '' ;}} ?>>P</option>
+                    <option value="Q" <? if(isset($_SESSION['destiny'])){if($_SESSION['destiny']=="Q" ){ echo 'selected' ;}else{ echo '' ;}} ?>>Q</option>
+                    <option value="R" <? if(isset($_SESSION['destiny'])){if($_SESSION['destiny']=="R" ){ echo 'selected' ;}else{ echo '' ;}} ?>>R</option>
+                    <option value="S" <? if(isset($_SESSION['destiny'])){if($_SESSION['destiny']=="S" ){ echo 'selected' ;}else{ echo '' ;}} ?>>S</option>
                 </select>
             </div>
             <input class="btn btn-primary" type="submit" value="Amplitude" name="amplitude">
@@ -75,6 +76,9 @@
             <input class="btn btn-primary" type="submit" value="Bidirecional" name="bidirectional">
             <a href="./teste.php"> Teste</a>
         </form>
+        <div>
+            <? echo $_SESSION['way'];?>
+        </div>
         <div id="sigma_div" style="width: 700px; height: 300px;"></div>
     </div>
 
