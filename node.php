@@ -324,7 +324,6 @@ class Search
         array_push($row, $end, 2);
         array_push($visited, $row);
 
-        // while (!is_null($l1->empty())) {
         while (True) {
             $flag1 = True;
             while ($flag1) {

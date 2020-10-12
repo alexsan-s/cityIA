@@ -1,9 +1,23 @@
 <?php
+include 'node.php';
+
 session_start();
 unset($_SESSION['way']);
-include 'node.php';
+
+$sol = new Search();
+
+
+$_SESSION['source'] = $_POST['source'];
+$_SESSION['destiny'] = $_POST['destiny'];
+
 $jsonString = file_get_contents('data.json');
 $data = json_decode($jsonString, true);
+
+
+$source = $_SESSION['source'];
+$destiny = $_SESSION['destiny'];
+$way = [];
+$ids = array();
 
 // $node = ["PMJN", "MML", "DT", "SDST", "CSFC", "MIST", "MHNT", "CR", "PM", "PVI", "MM"];
 // $graph = [
@@ -24,12 +38,6 @@ $graph = [
     [], ["A"], ["A"], ["E", "C", "B"], ["R", "H"], ["G", "C"], [],
     ["Q", "P"], ["Q"], [], ["F"], ["P", "E", "D"]
 ];
-$_SESSION['source'] = $_POST['source'];
-$_SESSION['destiny'] = $_POST['destiny'];
-$sol = new Search();
-$way = [];
-$source = $_POST['source'];
-$destiny = $_POST['destiny'];
 
 if (isset($_POST["amplitude"])) {
     $way = $sol->amplitude($source, $destiny, $node, $graph);
@@ -43,31 +51,34 @@ if (isset($_POST["amplitude"])) {
     $way = $sol->bidirectional($source, $destiny, $node, $graph);
 }
 if (is_array($way)) {
+    $_SESSION['way'] .= "Caminho: ";
     foreach (array_reverse($way) as $key) {
         $_SESSION['way'] .= "$key ";
     }
 } else {
     $_SESSION['way'] = $way;
 }
-$ids = array();
+
+
+foreach ($data as $key => $entry) {
+    for ($i = 0; $i < sizeof($entry); $i++) {
+        $data[$key][$i]['color'] = "#eee";
+    }
+}
 
 if (is_array($way)) {
     foreach ($data as $key => $entry) {
         if ($key == "nodes") {
-            for ($i = 0; $i < sizeof($entry); $i++) {
-                for ($j = 0; $j < sizeof($way); $j++) {
-                    if ($data[$key][$i]['label'] == $way[$j]) {;
+            for ($j = 0; $j < sizeof($way); $j++) {
+                for ($i = 0; $i < sizeof($entry); $i++) {
+                    if ($data[$key][$i]['label'] == $way[$j]) {
+                        echo $data[$key][$i]['label'];
                         array_push($ids, $data[$key][$i]['id']);
                         $data[$key][$i]['color'] = "#00f";
-                        break;
-                    } else {
-                        $data[$key][$i]['color'] = "#eee";
                     }
                 }
             }
         }
-        // print_r($ids);
-        // echo "<p>";
         if ($key == "edges") {
             for ($i = 0; $i < sizeof($entry); $i++) {
                 for ($j = sizeof($ids) - 1; $j >= 0; $j--) {
@@ -79,14 +90,11 @@ if (is_array($way)) {
                     } else {
                         $data[$key][$i]['color'] = "#eee";
                     }
-                    // echo $data[$key][$i]['source'];
                 }
             }
         }
     }
 }
-
-// echo "Corrigido<p>";
 
 $newJsonString = json_encode($data);
 file_put_contents('data.json', $newJsonString);
