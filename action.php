@@ -72,7 +72,6 @@ if (is_array($way)) {
             for ($j = 0; $j < sizeof($way); $j++) {
                 for ($i = 0; $i < sizeof($entry); $i++) {
                     if ($data[$key][$i]['label'] == $way[$j]) {
-                        echo $data[$key][$i]['label'];
                         array_push($ids, $data[$key][$i]['id']);
                         $data[$key][$i]['color'] = "#00f";
                     }
