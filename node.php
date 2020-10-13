@@ -530,4 +530,118 @@ class Search
         }
         return "Caminho não encontrado";
     }
+
+    function greedy($start, $end, $node, $graph, $h)
+    {
+        $l1 = new lista();
+        $l2 = new lista();
+        $visited = [];
+        $list = [];
+
+        $l1->insertLast($start, 0, 0, null);
+        $l2->insertLast($start, 0, 0, null);
+        $row = [];
+        array_push($row, $start, 0);
+        array_push($visited, $row);
+
+        while (!is_null($l1->empty())) {
+            $current = $l1->deleteFirst();
+            if ($current->state == $end) {
+                $way = [];
+                $way = $l2->showWay2($current->state, $current->value1);
+                array_push($list, $way, $current->value2);
+                return $list;
+            }
+            $ind = array_search($current->state, $node);
+            for ($i = sizeof($graph[$ind]) - 1; $i >= 0; $i--) {
+                $new = $graph[$ind][$i][0];
+                $ind1 = array_search($graph[$ind][$i][0], $node);
+
+
+                $v2 = $current->value2 + $graph[$ind][$i][1];
+                $v1 = $h[$ind1];
+
+                $flag1 = True;
+                $flag2 = True;
+                for ($j = sizeof($visited); $j >= 0; $j--) {
+                    if ($visited[$j][0] == $new) {
+                        if ($visited[$j][1] <= $v1) {
+                            $flag1 = False;
+                        } else {
+                            $visited[$j][1] = $v1;
+                            $flag2 = False;
+                        }
+                        break;
+                    }
+                }
+                if ($flag1) {
+                    $l1->insertPos_X($new, $v1, $v2, $current);
+                    $l2->insertPos_X($new, $v1, $v2, $current);
+                    if ($flag2) {
+                        $row = [];
+                        array_push($row, $new, $v1);
+                        array_push($visited, $row);
+                    }
+                }
+            }
+        }
+        return "Caminho não encontrado";
+    }
+
+    function a_star($start, $end, $node, $graph, $h)
+    {
+        $l1 = new lista();
+        $l2 = new lista();
+        $visited = [];
+        $list = [];
+
+        $l1->insertLast($start, 0, 0, null);
+        $l2->insertLast($start, 0, 0, null);
+        $row = [];
+        array_push($row, $start, 0);
+        array_push($visited, $row);
+
+        while (!is_null($l1->empty())) {
+            $current = $l1->deleteFirst();
+            if ($current->state == $end) {
+                $way = [];
+                $way = $l2->showWay2($current->state, $current->value1);
+                array_push($list, $way, $current->value2);
+                return $list;
+            }
+            $ind = array_search($current->state, $node);
+            for ($i = sizeof($graph[$ind]) - 1; $i >= 0; $i--) {
+                $new = $graph[$ind][$i][0];
+                $ind1 = array_search($graph[$ind][$i][0], $node);
+
+
+                $v2 = $current->value2 + $graph[$ind][$i][1];
+                $v1 = $v2 + $h[$ind1];
+
+                $flag1 = True;
+                $flag2 = True;
+                for ($j = sizeof($visited); $j >= 0; $j--) {
+                    if ($visited[$j][0] == $new) {
+                        if ($visited[$j][1] <= $v1) {
+                            $flag1 = False;
+                        } else {
+                            $visited[$j][1] = $v1;
+                            $flag2 = False;
+                        }
+                        break;
+                    }
+                }
+                if ($flag1) {
+                    $l1->insertPos_X($new, $v1, $v2, $current);
+                    $l2->insertPos_X($new, $v1, $v2, $current);
+                    if ($flag2) {
+                        $row = [];
+                        array_push($row, $new, $v1);
+                        array_push($visited, $row);
+                    }
+                }
+            }
+        }
+        return "Caminho não encontrado";
+    }
 }

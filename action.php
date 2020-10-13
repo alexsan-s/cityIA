@@ -55,6 +55,11 @@ $graph1 = [
     [["P", 90], ["E", 69], ["D", 40]]
 ];
 
+$h = [
+    366, 0, 160, 242, 161, 178, 77, 151, 226, 244,
+    241, 234
+];
+
 if (isset($_POST["amplitude"])) {
     $way = $sol->amplitude($source, $destiny, $node, $graph);
 } else if (isset($_POST["depth"])) {
@@ -64,13 +69,21 @@ if (isset($_POST["amplitude"])) {
 } else if (isset($_POST["iterative_deepening"])) {
     $way = $sol->iterative_deepening($source, $destiny, 4, $node, $graph);
 } else if (isset($_POST["bidirectional"])) {
-    $way = $sol->bidirectional($source, $destiny, $node, $graph);
+    $temp = $sol->bidirectional($source, $destiny, $node, $graph);
 } else if (isset($_POST["unifor_cost"])) {
-    $way = $sol->uniform_cost($source, $destiny, $node, $graph1);
-    $temp = $way[0];
-    $_SESSION['cost'] = "Custo do Caminho: " . $way[1];
-    $way = $temp;
+    $temp = $sol->uniform_cost($source, $destiny, $node, $graph1);
+    $way = $temp[0];
+    $_SESSION['cost'] = "Custo do Caminho: " . $temp[1];
+} else if (isset($_POST["greedy"])) {
+    $temp = $sol->greedy($source, $destiny, $node, $graph1, $h);
+    $way = $temp[0];
+    $_SESSION['cost'] = "Custo do Caminho: " . $temp[1];
+} else if (isset($_POST["a_star"])) {
+    $temp = $sol->a_star($source, $destiny, $node, $graph1, $h);
+    $way = $temp[0];
+    $_SESSION['cost'] = "Custo do Caminho: " . $temp[1];
 }
+
 if (is_array($way)) {
     $_SESSION['way'] .= "Caminho: ";
     foreach (array_reverse($way) as $key) {
