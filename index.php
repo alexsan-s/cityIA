@@ -74,9 +74,12 @@
             <input class="btn btn-primary" type="submit" value="Profundidade Limitada" name="depth_limit">
             <input class="btn btn-primary" type="submit" value="Aprofundamento Interativo" name="iterative_deepening">
             <input class="btn btn-primary" type="submit" value="Bidirecional" name="bidirectional">
+            <input class="btn btn-primary" type="submit" value="Custo Uniforme" name="unifor_cost">
         </form>
         <div>
             <?php echo $_SESSION['way'];?>
+            <p>
+            <?php echo $_SESSION['cost'];?>
         </div>
         <div id="sigma_div" style="width: 700px; height: 300px; background-image: url()"></div>
     </div>

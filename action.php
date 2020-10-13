@@ -3,6 +3,7 @@ include 'node.php';
 
 session_start();
 unset($_SESSION['way']);
+unset($_SESSION['cost']);
 
 $sol = new Search();
 
@@ -39,6 +40,21 @@ $graph = [
     ["Q", "P"], ["Q"], [], ["F"], ["P", "E", "D"]
 ];
 
+$graph1 = [
+    [[]],
+    [["A", 65]],
+    [["A", 55]],
+    [["E", 20], ["C", 55], ["B", 62]],
+    [["R", 55], ["H", 80]],
+    [["G", 10], ["C", 20]],
+    [[]],
+    [["Q", 30], ["P", 12]],
+    [["Q", 30]],
+    [[]],
+    [["F", 60]],
+    [["P", 90], ["E", 69], ["D", 40]]
+];
+
 if (isset($_POST["amplitude"])) {
     $way = $sol->amplitude($source, $destiny, $node, $graph);
 } else if (isset($_POST["depth"])) {
@@ -49,6 +65,11 @@ if (isset($_POST["amplitude"])) {
     $way = $sol->iterative_deepening($source, $destiny, 4, $node, $graph);
 } else if (isset($_POST["bidirectional"])) {
     $way = $sol->bidirectional($source, $destiny, $node, $graph);
+} else if (isset($_POST["unifor_cost"])) {
+    $way = $sol->uniform_cost($source, $destiny, $node, $graph1);
+    $temp = $way[0];
+    $_SESSION['cost'] = "Custo do Caminho: " . $way[1];
+    $way = $temp;
 }
 if (is_array($way)) {
     $_SESSION['way'] .= "Caminho: ";
@@ -65,7 +86,6 @@ foreach ($data as $key => $entry) {
         $data[$key][$i]['color'] = "#eee";
     }
 }
-
 if (is_array($way)) {
     foreach ($data as $key => $entry) {
         if ($key == "nodes") {
