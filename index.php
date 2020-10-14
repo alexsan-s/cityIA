@@ -32,7 +32,7 @@ $data = json_decode($jsonString, true); ?>
                 <li class="nav-item">
                     <a class="nav-link" href="about.php">Sobre</a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a class="nav-link" href="amplitude.php">Sobre</a>
                 </li>
@@ -52,13 +52,13 @@ $data = json_decode($jsonString, true); ?>
                                 for ($i = 0; $i < sizeof($entry); $i++) {
                         ?>
                                     <option value=" <?php echo $data[$key][$i]['id']; ?> " <?php
-                                                                                                if (isset($_SESSION['source'])) {
-                                                                                                    if ($_SESSION['source'] == $data[$key][$i]['id']) {
-                                                                                                        echo 'selected';
-                                                                                                    } else {
-                                                                                                        echo '';
-                                                                                                    }
-                                                                                                } ?>> <?php echo $data[$key][$i]['label']; ?> </option>
+                                                                                            if (isset($_SESSION['source'])) {
+                                                                                                if (trim($_SESSION['source']) == $data[$key][$i]['id']) {
+                                                                                                    echo 'selected';
+                                                                                                } else {
+                                                                                                    echo '';
+                                                                                                }
+                                                                                            } ?>> <?php echo $data[$key][$i]['label']; ?> </option>
                         <?php
                                 }
                             }
@@ -78,13 +78,13 @@ $data = json_decode($jsonString, true); ?>
                                 for ($i = 0; $i < sizeof($entry); $i++) {
                         ?>
                                     <option value=" <?php echo $data[$key][$i]['id']; ?> " <?php
-                                                                                                if (isset($_SESSION['destiny'])) {
-                                                                                                    if ($_SESSION['destiny'] == $data[$key][$i]['id']) {
-                                                                                                        echo 'selected';
-                                                                                                    } else {
-                                                                                                        echo '';
-                                                                                                    }
-                                                                                                } ?>> <?php echo $data[$key][$i]['label']; ?> </option>
+                                                                                            if (isset($_SESSION['destiny'])) {
+                                                                                                if (trim($_SESSION['destiny']) == $data[$key][$i]['id']) {
+                                                                                                    echo 'selected';
+                                                                                                } else {
+                                                                                                    echo '';
+                                                                                                }
+                                                                                            } ?>> <?php echo $data[$key][$i]['label']; ?> </option>
                         <?php
                                 }
                             }
@@ -103,9 +103,10 @@ $data = json_decode($jsonString, true); ?>
             <input class="btn btn-primary" type="submit" value="A Estrela" name="a_star">
         </form>
         <div class="alert alert-primary">
-            <?php if(isset($_SESSION['way'])) echo $_SESSION['way']; unset($_SESSION['way']); ?>
+            <?php echo $_SESSION['way']; ?>
             <p>
-                <?php if(isset($_SESSION['cost'])) echo $_SESSION['cost']; unset($_SESSION['way']); ?>
+                <?php echo $_SESSION['cost'];
+                ?>
         </div>
         <div id="sigma_div" style="height: 500; background-image: url()"></div>
     </div>

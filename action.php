@@ -1,5 +1,7 @@
 <?php
 session_start();
+unset($_SESSION['cost']);
+unset($_SESSION['way']);
 
 include 'node.php';
 
@@ -14,20 +16,25 @@ $_SESSION['destiny'] = $_POST['destiny'];
 $data = json_decode($jsonString, true);
 
 
-$source = $_SESSION['source'];
-$destiny = $_SESSION['destiny'];
+$source =  trim($_POST['source']);
+$destiny = trim($_POST['destiny']);
+
 $way = [];
 $ids = array();
 
-$node = ["CDF", "CSFDC", "CR", "DDT", "HM", "MM", "MDQ", "MDIEDSDT", "MDII", "MDHNDT", "MMA", "MMLSDPPA", "PM", "PMPDN", "PVDI", "RDC", "SDDST", "SEDDS", "TM"];
+$node = [
+    "CDF", "CSFDC", "CR", "DDT", "HM", "MM", "MDQ",
+    "MDIEDSDT", "MDII", "MDHNDT", "MMA", "MMLSDPPA", "PM",
+    "PMJDN", "PVDI", "RDC", "SDDST", "SEDDS", "TM"
+];
 $graph = [
     ["CR", "MM", "SDDST"],
     ["DDT", "MM", "RDC", "SDDST", "TM"],
     ["CDF", "HM", "MM", "PVDI"],
-    ["CSFDC", "PMPDN", "RDC", "SDDST"],
+    ["CSFDC", "PMJDN", "RDC", "SDDST"],
     ["CR", "MM", "MDHNDT", "PM"],
     ["CDF", "CSFDC", "CR", "HM", "SDDST", "TM"],
-    ["MDII", "PMPDN"],
+    ["MDII", "PMJDN"],
     ["MDHNDT", "SEDDS"],
     ["MDQ"],
     ["HM", "MDIEDSDT"],
@@ -36,7 +43,7 @@ $graph = [
     ["HM", "PVDI"],
     ["DDT", "MDQ", "RDC"],
     ["CR", "MMA", "PM"],
-    ["CSFDC", "DDT", "MMLSDPPA", "PMPDN"],
+    ["CSFDC", "DDT", "MMLSDPPA", "PMJDN"],
     ["CDF", "CSFDC", "DDT", "MM"],
     ["MDIEDSDT"],
     ["CSFDC", "MM"],
@@ -46,10 +53,10 @@ $graph1 = [
     [["CR", 521], ["MM", 1003], ["SDDST", 995]],
     [["DDT", 858], ["MM", 244], ["RDC", 963], ["SDDST", 765], ["TM", 65]],
     [["CDF", 565], ["HM", 2300], ["MM", 1020], ["PVDI", 1029]],
-    [["CSFDC", 880], ["PMPDN", 1029], ["RDC", 704], ["SDDST", 169]],
+    [["CSFDC", 880], ["PMJDN", 1029], ["RDC", 704], ["SDDST", 169]],
     [["CR", 2300], ["MM", 2014], ["MDHNDT", 270], ["PM", 2007]],
     [["CDF", 1003], ["CSFDC", 244], ["CR", 1020], ["HM", 2014], ["SDDST", 876], ["TM", 234]],
-    [["MDII", 466], ["PMPDN", 5062]],
+    [["MDII", 466], ["PMJDN", 5062]],
     [["MDHNDT", 115], ["SEDDS", 1021]],
     [["MDQ", 466]],
     [["HM", 270], ["MDIEDSDT", 115]],
@@ -58,7 +65,7 @@ $graph1 = [
     [["HM", 2007], ["PVDI", 71]],
     [["DDT", 1029], ["MDQ", 5062], ["RDC", 1015]],
     [["CR", 1029], ["MMA", 1004], ["PM", 71]],
-    [["CSFDC", 963], ["DDT", 704], ["MMLSDPPA", 429], ["PMPDN", 1015]],
+    [["CSFDC", 963], ["DDT", 704], ["MMLSDPPA", 429], ["PMJDN", 1015]],
     [["CDF", 995], ["CSFDC", 765], ["DDT", 169], ["MM", 876]],
     [["MDIEDSDT", 1021]],
     [["CSFDC", 65], ["MM", 234]],
@@ -70,7 +77,7 @@ $graph1 = [
 // ];
 
 if (isset($_POST["amplitude"])) {
-    print_r($source);
+    echo $source;
     echo "<p>";
     print_r($destiny);
     echo "<p>";
@@ -146,7 +153,7 @@ if (is_array($way)) {
     }
 }
 
-// $newJsonString = json_encode($data);
-// file_put_contents('data.json', $newJsonString);
-// header("Location: index.php");
-// die();
+$newJsonString = json_encode($data);
+file_put_contents('data.json', $newJsonString);
+header("Location: index.php");
+die();
