@@ -168,29 +168,29 @@ class Lista
     }
 }
 
-$start = "CASA DO FIGUREIRO";
-$end = "SANTUARIO DIOCESANO DE SANTA TERESINHA";
-$node = ["CASA DO FIGUREIRO", "CATEDRAL SAO FRANCISCO DE CHEGAS", "CRISTO REDENTOR", "DIOCESE DE TAUBATE", "HORTO MUNICIPAL", "MERCADO MUNICIPAL", "MIRANTE DO QUIRIRIM", "MUSEU DA IMAGEM E DO SOM DE TAUBATE", "MUSEU DA IMIGRACAO ITALIANA", "MUSEU DE HISTORIA NATURAL DE TAUBATE", "MUSEU MAZZAROPI", "MUSEU MONTEIRO LOBATO - SITIO DO PICA-PAU AMARELO", "PARQUE MUNICIPAL", "PARQUE MUNICIPAL JARDIM DAS NACOES", "PARQUE VALE DO ITAIM", "RELOGIO DA CTI", "SANTUARIO DIOCESANO DE SANTA TERESINHA", "SISTEMA EDUCACIONAL DE DESENVOLVIMENTO SOCIAL", "TEATRO METROPOLE"];
+$start = "CDF";
+$end = "RDC";
+$node = ["CDF", "CSFDC", "CR", "DDT", "HM", "MM", "MDQ", "MDIEDSDT", "MDII", "MDHNDT", "MMA", "MMLSDPPA", "PM", "PMPDN", "PVDI", "RDC", "SDDST", "SEDDS", "TM"];
 $graph = [
-    ["CRISTO REDENTOR", "MERCADO MUNICIPAL", "SANTUARIO DIOCESANO DE SANTA TERESINHA"],
-    ["DIOCESE DE TAUBATE", "MERCADO MUNICIPAL", "RELOGIO DA CTI", "SANTUARIO DIOCESANO DE SANTA TERESINHA", "TEATRO METROPOLE"],
-    ["CASA DO FIGUREIRO", "HORTO MUNICIPAL", "MERCADO MUNICIPAL", "PARQUE VALE DO ITAIM"],
-    ["CATEDRAL SAO FRANCISCO DE CHEGAS", "PARQUE MUNICIPAL JARDIM DAS NACOES", "RELOGIO DA CTI", "SANTUARIO DIOCESANO DE SANTA TERESINHA"],
-    ["CRISTO REDENTOR", "MERCADO MUNICIPAL", "MUSEU DE HISTORIA NATURAL DE TAUBATE", "PARQUE MUNICIPAL"],
-    ["CASA DO FIGUREIRO", "CATEDRAL SAO FRANCISCO DE CHEGAS", "CRISTO REDENTOR", "HORTO MUNICIPAL", "SANTUARIO DIOCESANO DE SANTA TERESINHA", "TEATRO METROPOLE"],
-    ["MUSEU DA IMIGRACAO ITALIANA", "PARQUE MUNICIPAL JARDIM DAS NACOES"],
-    ["MUSEU DE HISTORIA NATURAL DE TAUBATE", "SISTEMA EDUCACIONAL DE DESENVOLVIMENTO SOCIAL"],
-    ["MIRANTE DO QUIRIRIM"],
-    ["HORTO MUNICIPAL", "MUSEU DA IMAGEM E DO SOM DE TAUBATE"],
-    ["PARQUE VALE DO ITAIM"],
-    ["RELOGIO DA CTI"],
-    ["HORTO MUNICIPAL", "PARQUE VALE DO ITAIM"],
-    ["DIOCESE DE TAUBATE", "MIRANTE DO QUIRIRIM", "RELOGIO DA CTI"],
-    ["CRISTO REDENTOR", "MUSEU MAZZAROPI", "PARQUE MUNICIPAL"],
-    ["CATEDRAL SAO FRANCISCO DE CHEGAS", "DIOCESE DE TAUBATE", "MUSEU MONTEIRO LOBATO - SITIO DO PICA-PAU AMARELO", "PARQUE MUNICIPAL JARDIM DAS NACOES"],
-    ["CASA DO FIGUREIRO", "CATEDRAL SAO FRANCISCO DE CHEGAS", "DIOCESE DE TAUBATE", "MERCADO MUNICIPAL"],
-    ["MUSEU DA IMAGEM E DO SOM DE TAUBATE"],
-    ["CATEDRAL SAO FRANCISCO DE CHEGAS", "MERCADO MUNICIPAL"],
+    ["CR", "MM", "SDDST"],
+    ["DDT", "MM", "RDC", "SDDST", "TM"],
+    ["CDF", "HM", "MM", "PVDI"],
+    ["CSFDC", "PMPDN", "RDC", "SDDST"],
+    ["CR", "MM", "MDHNDT", "PM"],
+    ["CDF", "CSFDC", "CR", "HM", "SDDST", "TM"],
+    ["MDII", "PMPDN"],
+    ["MDHNDT", "SEDDS"],
+    ["MDQ"],
+    ["HM", "MDIEDSDT"],
+    ["PVDI"],
+    ["RDC"],
+    ["HM", "PVDI"],
+    ["DDT", "MDQ", "RDC"],
+    ["CR", "MMA", "PM"],
+    ["CSFDC", "DDT", "MMLSDPPA", "PMPDN"],
+    ["CDF", "CSFDC", "DDT", "MM"],
+    ["MDIEDSDT"],
+    ["CSFDC", "MM"],
 ];
 
 function amplitude($start, $end, $node, $graph)
@@ -218,7 +218,7 @@ function amplitude($start, $end, $node, $graph)
                         if ($visited[$j][1] <= ($current->value2 + 1)) {
                             $flag = False;
                         } else {
-                            $visited[$j][1] = $this->current->value2 + 1;
+                            $visited[$j][1] = $current->value2 + 1;
                         }
                         break;
                     }
@@ -240,4 +240,7 @@ function amplitude($start, $end, $node, $graph)
         return "Caminho não encontrado";
     }
 
-echo amplitude($start, $end, $node, $graph);
+$way =  amplitude($start, $end, $node, $graph);
+foreach($way as $key){
+    echo $key . " ";
+}
