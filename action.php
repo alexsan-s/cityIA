@@ -125,11 +125,10 @@ if (is_array($way)) {
     foreach ($data as $key => $entry) {
         if ($key == "nodes") {
             for ($j = 0; $j < sizeof($way); $j++) {
-                echo $way[$j];
                 for ($i = 0; $i < sizeof($entry); $i++) {
                     if ($data[$key][$i]['id'] == $way[$j]) {
                         array_push($ids, $data[$key][$i]['id']);
-                        $_SESSION['way'] .= ' ' . $data[$key][$i]['label'] . ' -';
+                        $_SESSION['way'] .= ' ' . $data[$key][$i]['label'] . ';';
                         $data[$key][$i]['color'] = "#24FA0F";
                     }
                 }
