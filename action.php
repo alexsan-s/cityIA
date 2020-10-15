@@ -94,7 +94,7 @@ if (isset($_POST["amplitude"])) {
 } else if (isset($_POST["iterative_deepening"])) {
     $way = $sol->iterative_deepening($source, $destiny, 4, $node, $graph);
 } else if (isset($_POST["bidirectional"])) {
-    $temp = $sol->bidirectional($source, $destiny, $node, $graph);
+    $way = $sol->bidirectional($source, $destiny, $node, $graph);
 } else if (isset($_POST["unifor_cost"])) {
     $temp = $sol->uniform_cost($source, $destiny, $node, $graph1);
     $way = $temp[0];
@@ -125,6 +125,7 @@ if (is_array($way)) {
     foreach ($data as $key => $entry) {
         if ($key == "nodes") {
             for ($j = 0; $j < sizeof($way); $j++) {
+                echo $way[$j];
                 for ($i = 0; $i < sizeof($entry); $i++) {
                     if ($data[$key][$i]['id'] == $way[$j]) {
                         array_push($ids, $data[$key][$i]['id']);
@@ -139,8 +140,10 @@ if (is_array($way)) {
                 for ($j = sizeof($ids) - 1; $j >= 0; $j--) {
                     $temp = $j;
                     $temp--;
-                    if ($data[$key][$i]['source'] == $ids[$j] && $data[$key][$i]['target'] == $ids[$temp]
-                    || $data[$key][$i]['source'] == $ids[$temp] && $data[$key][$i]['target'] == $ids[$j]) {
+                    if (
+                        $data[$key][$i]['source'] == $ids[$j] && $data[$key][$i]['target'] == $ids[$temp]
+                        || $data[$key][$i]['source'] == $ids[$temp] && $data[$key][$i]['target'] == $ids[$j]
+                    ) {
                         $data[$key][$i]['color'] = "#24FA0F";
                         break;
                     } else {
