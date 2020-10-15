@@ -110,10 +110,7 @@ if (isset($_POST["amplitude"])) {
 }
 
 if (is_array($way)) {
-    $_SESSION['way'] .= "Caminho: ";
-    foreach (array_reverse($way) as $key) {
-        $_SESSION['way'] .= "$key ";
-    }
+    $_SESSION['way'] .= "Caminho:";
 } else {
     $_SESSION['way'] = $way;
 }
@@ -131,6 +128,7 @@ if (is_array($way)) {
                 for ($i = 0; $i < sizeof($entry); $i++) {
                     if ($data[$key][$i]['id'] == $way[$j]) {
                         array_push($ids, $data[$key][$i]['id']);
+                        $_SESSION['way'] .= ' ' . $data[$key][$i]['label'] . ' -';
                         $data[$key][$i]['color'] = "#24FA0F";
                     }
                 }
