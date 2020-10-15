@@ -33,10 +33,6 @@ $data = json_decode($jsonString, true); ?>
                     <a class="nav-link" href="about.php">Sobre</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="amplitude.php">Sobre</a>
-                </li>
-
             </ul>
         </div>
     </nav>

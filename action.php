@@ -121,7 +121,7 @@ if (is_array($way)) {
 
 foreach ($data as $key => $entry) {
     for ($i = 0; $i < sizeof($entry); $i++) {
-        $data[$key][$i]['color'] = "#eee";
+        $data[$key][$i]['color'] = "#0FA8FA";
     }
 }
 if (is_array($way)) {
@@ -131,7 +131,7 @@ if (is_array($way)) {
                 for ($i = 0; $i < sizeof($entry); $i++) {
                     if ($data[$key][$i]['id'] == $way[$j]) {
                         array_push($ids, $data[$key][$i]['id']);
-                        $data[$key][$i]['color'] = "#00f";
+                        $data[$key][$i]['color'] = "#24FA0F";
                     }
                 }
             }
@@ -141,11 +141,12 @@ if (is_array($way)) {
                 for ($j = sizeof($ids) - 1; $j >= 0; $j--) {
                     $temp = $j;
                     $temp--;
-                    if ($data[$key][$i]['source'] == $ids[$j] && $data[$key][$i]['target'] == $ids[$temp]) {
-                        $data[$key][$i]['color'] = "#00f";
+                    if ($data[$key][$i]['source'] == $ids[$j] && $data[$key][$i]['target'] == $ids[$temp]
+                    || $data[$key][$i]['source'] == $ids[$temp] && $data[$key][$i]['target'] == $ids[$j]) {
+                        $data[$key][$i]['color'] = "#24FA0F";
                         break;
                     } else {
-                        $data[$key][$i]['color'] = "#eee";
+                        $data[$key][$i]['color'] = "#0FA8FA";
                     }
                 }
             }
