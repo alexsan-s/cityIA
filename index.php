@@ -1,6 +1,8 @@
 <?php session_start();
 $jsonString = file_get_contents('data.json');
 $data = json_decode($jsonString, true); ?>
+
+
 <html>
 
 <head>
@@ -23,6 +25,12 @@ $data = json_decode($jsonString, true); ?>
 </head>
 
 <body>
+    <?php
+    if (isset($_SESSION['erro'])) {
+        echo "<script> alert('{$_SESSION['erro']}')</script>";
+        unset($_SESSION['erro']);
+    }
+    ?>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
@@ -36,11 +44,11 @@ $data = json_decode($jsonString, true); ?>
             </ul>
         </div>
     </nav>
-    <div class="col-sm-10 mx-auto">
+    <div class="col-sm-11 mx-auto">
         <form action="/action.php" method="post">
             <div class="form-group row">
-                <label for="exampleFormControlSelect1">Origem</label>
-                <div class="col-sm-10">
+                <label class="d-flex align-items-center">Origem</label>
+                <div class="col-sm-3">
                     <select class="form-control" id="" name="source">
                         <?php
                         foreach ($data as $key => $entry) {
@@ -63,10 +71,8 @@ $data = json_decode($jsonString, true); ?>
 
                     </select>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label for="exampleFormControlSelect1">Destino</label>
-                <div class="col-sm-10">
+                <label class="d-flex align-items-center">Destino</label>
+                <div class="col-sm-3">
                     <select class="form-control" id="" name="destiny">
                         <?php
                         foreach ($data as $key => $entry) {
@@ -87,6 +93,10 @@ $data = json_decode($jsonString, true); ?>
                         }
                         ?>
                     </select>
+                </div>
+                <label class="d-flex align-items-center">Limite</label>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control" name="limit" <?php if (isset($_SESSION['limit'])) { echo "value='{$_SESSION['limit']}'"; } ?> >
                 </div>
             </div>
             <input class="btn btn-primary" type="submit" value="Amplitude" name="amplitude">

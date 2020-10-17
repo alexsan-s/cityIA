@@ -90,9 +90,27 @@ if (isset($_POST["amplitude"])) {
 } else if (isset($_POST["depth"])) {
     $way = $sol->depth($source, $destiny, $node, $graph);
 } else if (isset($_POST["depth_limit"])) {
-    $way = $sol->depth_limit($source, $destiny, 4, $node, $graph);
+    if (isset($_POST['limit'])) {
+        if ($_POST['limit'] >= 1) {
+            $_SESSION['limit'] = $_POST['limit'];
+            $limit = $_POST['limit'];
+        } else {
+            $_SESSION['erro'] = "Limite não informado";
+            header("Location: index.php");
+        }
+    }
+    $way = $sol->depth_limit($source, $destiny, $limit, $node, $graph);
 } else if (isset($_POST["iterative_deepening"])) {
-    $way = $sol->iterative_deepening($source, $destiny, 4, $node, $graph);
+    if (isset($_POST['limit'])) {
+        if ($_POST['limit'] >= 1) {
+            $_SESSION['limit'] = $_POST['limit'];
+            $limit = $_POST['limit'];
+        } else {
+            $_SESSION['erro'] = "Limite não informado";
+            header("Location: index.php");
+        }
+    }
+    $way = $sol->iterative_deepening($source, $destiny, $limit, $node, $graph);
 } else if (isset($_POST["bidirectional"])) {
     $way = $sol->bidirectional($source, $destiny, $node, $graph);
 } else if (isset($_POST["unifor_cost"])) {
