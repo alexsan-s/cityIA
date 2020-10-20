@@ -77,16 +77,7 @@ $graph1 = [
 // ];
 
 if (isset($_POST["amplitude"])) {
-    echo $source;
-    echo "<p>";
-    print_r($destiny);
-    echo "<p>";
-    print_r($node);
-    echo "<p>";
-    print_r($graph);
-    echo "<p>";
     $way = $sol->amplitude($source, $destiny, $node, $graph);
-    print_r($way);
 } else if (isset($_POST["depth"])) {
     $way = $sol->depth($source, $destiny, $node, $graph);
 } else if (isset($_POST["depth_limit"])) {
