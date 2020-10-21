@@ -407,7 +407,7 @@ class Search
                             $way = [];
                             $way = $l2->showWay();
                             $way = array_reverse($way);
-                            foreach ($l2->showWay1($new) as $key) {
+                            foreach ($l4->showWay1($new) as $key) {
                                 array_push($way, $key);
                             }
                             return $way;
