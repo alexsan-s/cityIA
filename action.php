@@ -124,7 +124,7 @@ if (is_array($way)) {
     $_SESSION['way'] = $way;
 }
 
-
+$way = array_reverse($way);
 foreach ($data as $key => $entry) {
     for ($i = 0; $i < sizeof($entry); $i++) {
         $data[$key][$i]['color'] = "#0FA8FA";
